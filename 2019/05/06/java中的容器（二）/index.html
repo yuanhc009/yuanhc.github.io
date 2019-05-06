@@ -6,18 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/4 | yuanhc</title>
+  <title>java中的容器（二） | yuanhc</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="生活是具体的">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yuanhc">
-<meta property="og:url" content="http://yoursite.com/archives/2019/04/index.html">
+  <meta name="description" content="Java中常见的容器有List, Set, Map等，其中，各个容器的抽象接口及实现类的关系如下。本文主要讲Java中的Map和Set的一些内容，主要以问题的形式进行阐述。">
+<meta name="keywords" content="HashMap, TreeMap, HashSet, TreeSet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java中的容器（二）">
+<meta property="og:url" content="http://yoursite.com/2019/05/06/java中的容器（二）/index.html">
 <meta property="og:site_name" content="yuanhc">
-<meta property="og:description" content="生活是具体的">
+<meta property="og:description" content="Java中常见的容器有List, Set, Map等，其中，各个容器的抽象接口及实现类的关系如下。本文主要讲Java中的Map和Set的一些内容，主要以问题的形式进行阐述。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/yuanhc009/yuanhc009.github.io/master/img/all.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yuanhc009/yuanhc009.github.io/master/img/HashMap%E4%B8%ADput%E6%96%B9%E6%B3%95%E6%B5%81%E7%A8%8B.png">
+<meta property="og:updated_time" content="2019-05-06T06:33:48.495Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yuanhc">
-<meta name="twitter:description" content="生活是具体的">
+<meta name="twitter:title" content="java中的容器（二）">
+<meta name="twitter:description" content="Java中常见的容器有List, Set, Map等，其中，各个容器的抽象接口及实现类的关系如下。本文主要讲Java中的Map和Set的一些内容，主要以问题的形式进行阐述。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yuanhc009/yuanhc009.github.io/master/img/all.jpg">
   
     <link rel="alternative" href="/atom.xml" title="yuanhc" type="application/atom+xml">
   
@@ -153,60 +158,300 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java中的容器（二）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/04/27/java中的容器（一）/" class="archive-article-date">
-  	<time datetime="2019-04-27T03:11:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/27/java中的容器（一）/">java中的容器（一）</a>
+    <h1 class="article-title" itemprop="name">
+      java中的容器（二）
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/05/06/java中的容器（二）/" class="archive-article-date">
+  	<time datetime="2019-05-06T01:36:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Java中常见的容器有List, Set, Map等，其中，各个容器的抽象接口及实现类的关系如下。本文主要讲Java中的Map和Set的一些内容，主要以问题的形式进行阐述。</p>
+<a id="more"></a>
+<p><img src="https://raw.githubusercontent.com/yuanhc009/yuanhc009.github.io/master/img/all.jpg" alt="java中容器的相关接口和实现类"></p>
+<ul>
+<li>Set：实现 Set 接口的数据结构不允许重复的元素，例如 HashSet、LinkedHashSet</li>
+<li>SortedSet：实现 SortedSet 接口的数据结构默认可按升序打印元素，例如 TreeSet</li>
+<li>Map：实现 Map 接口的数据结构存储键值对，不允许重复的 key，例如 HashMap、LinkedHashMap、Hashtable</li>
+<li><p>SortedMap：继承了 Map 接口，存储键值对，不允许重复的 key，默认可按 key 升序打印元素，例如 TreeMap。SortedSet 与 SortedMap 默认的排序是自然序，可通过 Comparator 或 Comparable 接口实现自定义排序。</p>
+</li>
+<li><p>HashMap：实现 Map 接口，不允许重复的 key，底层数据结构是数组+链表。值得注意的是，数组中的元素是作为对应哈希值的链表的第一个元素，所以数组中存储的也是键值对。</p>
+</li>
+<li>LinkedHashMap：实现 Map 接口，不允许重复的 key，底层数据结构可以理解为HashMap+双向链表。<a href="https://www.cnblogs.com/xiaoxi/p/6170590.html" target="_blank" rel="noopener">LinkedHashMap源码解读</a>  </li>
+<li>HashTable：实现 Map 接口，不允许重复的 key，底层数据结构 hash table</li>
+<li>TreeMap：实现 SortedMap 接口，不允许重复的 key，底层数据结构红黑树</li>
+<li>HashSet：实现 Set 接口，不允许重复的元素，底层数据结构是数组+链表</li>
+<li>LinkedHashSet：实现 Set 接口，不允许重复的元素，底层数据结构可以理解为HashMap+双向链表</li>
+<li>TreeSet：实现 NavigableSet 接口，不允许重复的元素，底层数据结构红黑树</li>
+</ul>
+<h4 id="HashMap是怎么解决哈希冲突的？"><a href="#HashMap是怎么解决哈希冲突的？" class="headerlink" title="HashMap是怎么解决哈希冲突的？"></a>HashMap是怎么解决哈希冲突的？</h4><h6 id="什么是哈希"><a href="#什么是哈希" class="headerlink" title="什么是哈希"></a>什么是哈希</h6><p>Hash，是把任意长度的输入通过散列算法，变换成固定长度的输出，该输出就是散列值（哈希值）；这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间，不同的输入可能会散列成相同的输出，所以不可能从散列值来唯一的确定输入值。简单的说就是一种将任意长度的消息压缩到某一固定长度的消息摘要的函数。<br>所有散列函数都有如下一个基本特性：<strong>根据同一散列函数计算出的散列值如果不同，那么输入值肯定也不同。但是，根据同一散列函数计算出的散列值如果相同，输入值不一定相同。</strong>  </p>
+<h6 id="什么是哈希冲突呢"><a href="#什么是哈希冲突呢" class="headerlink" title="什么是哈希冲突呢"></a>什么是哈希冲突呢</h6><p>当两个不同的输入值，根据同一散列函数计算出相同的散列值的现象，我们就把它叫做碰撞（哈希碰撞）。</p>
+<h6 id="HashMap的数据结构"><a href="#HashMap的数据结构" class="headerlink" title="HashMap的数据结构"></a>HashMap的数据结构</h6><p>在Java中，保存数据有两种比较简单的数据结构：数组和链表。数组的特点是：寻址容易，插入和删除困难；链表的特点是：寻址困难，但插入和删除容易；所以我们将数组和链表结合在一起，发挥两者各自的优势，使用一种叫做<strong>链地址法</strong>的方式可以解决哈希冲突。<br>这样我们就可以将拥有相同哈希值的对象组织成一个链表放在hash值所对应的bucket下，但相比于hashCode返回的int类型，我们HashMap初始的容量大小DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4（即2的四次方16）要远小于int类型的范围，所以我们如果只是单纯的用hashCode取余来获取对应的bucket这将会大大增加哈希碰撞的概率，并且最坏情况下还会将HashMap变成一个单链表，所以我们还需要对hashCode作一定的优化  </p>
+<h6 id="Hash-函数"><a href="#Hash-函数" class="headerlink" title="Hash()函数"></a>Hash()函数</h6><p>上面提到的问题，主要是因为如果使用hashCode取余，那么相当于参与运算的只有hashCode的低位，高位是没有起到任何作用的，所以我们的思路就是让hashCode取值出的高位也参与运算，进一步降低hash碰撞的概率，使得数据分布更平均，我们把这样的操作称为扰动，在JDK 1.8中的hash()函数如下：</p>
+<blockquote>
+<p>static final int hash(Object key) {<br>    int h;<br>    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);// 与自己右移16位进行异或运算（高低位异或）<br>}  </p>
+</blockquote>
+<p>这比在JDK 1.7中，更为简洁，相比在1.7中的4次位运算，5次异或运算（9次扰动），在1.8中，只进行了1次位运算和1次异或运算（2次扰动）；<br>JDK1.8中增加红黑树。通过上面的链地址法（使用散列表）和扰动函数我们成功让我们的数据分布更平均，哈希碰撞减少，但是当我们的HashMap中存在大量数据时，加入我们某个bucket下对应的链表有n个元素，那么遍历时间复杂度就为O(n)，为了针对这个问题，JDK1.8在HashMap中新增了红黑树的数据结构，进一步使得遍历复杂度降低至O(logn)；</p>
+<h6 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h6><p>简单总结一下HashMap是使用了哪些方法来有效解决哈希冲突的：</p>
+<ol>
+<li>使用链地址法（使用散列表）来链接拥有相同hash值的数据；</li>
+<li>使用2次扰动函数（hash函数）来降低哈希冲突的概率，使得数据分布更平均；</li>
+<li>引入红黑树进一步降低遍历的时间复杂度，使得遍历更快；</li>
+</ol>
+<h4 id="HashMap为什么不直接使用hashCode-处理后的哈希值直接作为table的下标？"><a href="#HashMap为什么不直接使用hashCode-处理后的哈希值直接作为table的下标？" class="headerlink" title="HashMap为什么不直接使用hashCode()处理后的哈希值直接作为table的下标？"></a>HashMap为什么不直接使用hashCode()处理后的哈希值直接作为table的下标？</h4><p>hashCode()方法返回的是int整数类型，其范围为-(2 ^ 31)~(2 ^ 31 - 1)，约有40亿个映射空间，而HashMap的容量范围是在16（初始化默认值）~2 ^ 30，HashMap通常情况下是取不到最大值的，并且设备上也难以提供这么多的存储空间，从而导致通过hashCode()计算出的哈希值可能不在数组大小范围内，进而无法匹配存储位置；</p>
+<h6 id="那么怎么解决呢？"><a href="#那么怎么解决呢？" class="headerlink" title="那么怎么解决呢？"></a>那么怎么解决呢？</h6><p>1）HashMap自己实现了自己的hash()方法，通过两次扰动使得它自己的哈希值高低位自行进行异或运算，降低哈希碰撞概率也使得数据分布更平均；<br>2）在保证数组长度为2的幂次方的时候，使用hash()运算之后的值与运算（&amp;）（数组长度 - 1）来获取数组下标的方式进行存储，这样一来是比取余操作更加有效率，二来也是因为只有当数组长度为2的幂次方时，h&amp;(length-1)才等价于h%length，三来解决了“哈希值与数组大小范围不匹配”的问题；</p>
+<h6 id="为什么数组长度要保证为2的幂次方呢？"><a href="#为什么数组长度要保证为2的幂次方呢？" class="headerlink" title="为什么数组长度要保证为2的幂次方呢？"></a>为什么数组长度要保证为2的幂次方呢？</h6><p>只有当数组长度为2的幂次方时，h&amp;(length-1)才等价于h%length，即实现了key的定位，2的幂次方也可以减少冲突次数，提高HashMap的查询效率；<br>如果 length 为 2 的次幂 则 length-1 转化为二进制必定是 11111……的形式，在于 h 的二进制与操作效率会非常的快，而且空间不浪费；如果 length 不是 2 的次幂，比如 length 为 15，则 length - 1 为 14，对应的二进制为 1110，在于 h 与操作，最后一位都为 0 ，而 0001，0011，0101，1001，1011，0111，1101 这几个位置永远都不能存放元素了，空间浪费相当大，更糟的是这种情况中，数组可以使用的位置比数组长度小了很多，这意味着进一步增加了碰撞的几率，减慢了查询的效率！这样就会造成空间的浪费。</p>
+<h6 id="那为什么是两次扰动呢？"><a href="#那为什么是两次扰动呢？" class="headerlink" title="那为什么是两次扰动呢？"></a>那为什么是两次扰动呢？</h6><p>这样就是加大哈希值低位的随机性，使得分布更均匀，从而提高对应数组存储下标位置的随机性&amp;均匀性，最终减少Hash冲突，两次就够了，已经达到了高位低位同时参与运算的目的；</p>
+<h4 id="为什么HashMap中String、Integer这样的包装类适合作为K？"><a href="#为什么HashMap中String、Integer这样的包装类适合作为K？" class="headerlink" title="为什么HashMap中String、Integer这样的包装类适合作为K？"></a>为什么HashMap中String、Integer这样的包装类适合作为K？</h4><p>1.String、Integer等包装类的特性能够保证Hash值的不可更改性和计算准确性，能够有效的减少Hash碰撞的几率。2.都是final类型，即不可变性，保证key的不可更改性，不会存在获取hash值不同的情况。3.内部已重写了equals()、hashCode()等方法，遵守了HashMap内部的规范（不清楚可以去上面看看putValue的过程），不容易出现Hash值计算错误的情况；</p>
+<h6 id="如果我想要让自己的Object作为K应该怎么办呢？"><a href="#如果我想要让自己的Object作为K应该怎么办呢？" class="headerlink" title="如果我想要让自己的Object作为K应该怎么办呢？"></a>如果我想要让自己的Object作为K应该怎么办呢？</h6><p>重写hashCode()和equals()方法。重写hashCode()是因为需要计算存储数据的存储位置，需要注意不要试图从散列码计算中排除掉一个对象的关键部分来提高性能，这样虽然能更快但可能会导致更多的Hash碰撞；<br>重写equals()方法，需要遵守自反性、对称性、传递性、一致性以及对于任何非null的引用值x，x.equals(null)必须返回false的这几个特性，目的是为了保证key在哈希表中的唯一性；</p>
+<h4 id="HashSet是如何保证数据不可重复的？"><a href="#HashSet是如何保证数据不可重复的？" class="headerlink" title="HashSet是如何保证数据不可重复的？"></a>HashSet是如何保证数据不可重复的？</h4><p>HashSet的底层其实就是HashMap，只不过我们HashSet是实现了Set接口并且把数据作为K值，而V值一直使用一个相同的虚值来保存，我们可以看到源码：</p>
+<blockquote>
+<p>public boolean add(E e) {<br>    return map.put(e, PRESENT)==null;// 调用HashMap的put方法,PRESENT是一个至始至终都相同的虚值<br>}</p>
+</blockquote>
+<p>由于HashMap的K值本身就不允许重复，并且在HashMap中如果K/V相同时，会用新的V覆盖掉旧的V，然后返回旧的V，那么在HashSet中执行这一句话始终会返回一个false，导致插入失败，这样就保证了数据的不可重复性；</p>
+<h4 id="CurrentHashMap"><a href="#CurrentHashMap" class="headerlink" title="CurrentHashMap"></a>CurrentHashMap</h4><p>CurrentHashMap是java.util.concurrent包中的类，解决HashMap线程不安全和Hashtable效率不高的问题，实现了在多线程编程中可以使用一个高性能的线程安全HashMap方案。</p>
+<h6 id="JDK1-7版本的CurrentHashMap的实现原理"><a href="#JDK1-7版本的CurrentHashMap的实现原理" class="headerlink" title="JDK1.7版本的CurrentHashMap的实现原理"></a>JDK1.7版本的CurrentHashMap的实现原理</h6><p>采用了数组+Segment+分段锁的方式实现。使用分段锁(Segment)技术，将数据分成一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问，能够实现真正的并发访问。但是，ConcurrentHashMap定位一个元素的过程需要进行两次Hash操作：第一次Hash定位到Segment，第二次Hash定位到元素所在的链表的头部。<br><strong>劣势</strong>：Hash的过程要比普通的HashMap要长<br><strong>优势</strong>：并发能力可以大大的提高。写操作的时候可以只对元素所在的Segment进行加锁即可，不会影响到其他的Segment，这样，在最理想的情况下，ConcurrentHashMap可以最高同时支持Segment数量大小的写操作（刚好这些写操作都非常平均地分布在所有的Segment上）。</p>
+<h6 id="JDK1-8版本的CurrentHashMap的实现原理"><a href="#JDK1-8版本的CurrentHashMap的实现原理" class="headerlink" title="JDK1.8版本的CurrentHashMap的实现原理"></a>JDK1.8版本的CurrentHashMap的实现原理</h6><p>采用了数组+链表+红黑树的实现方式来设计，内部大量采用CAS操作。采用Node保存key，value及key的hash值的数据结构。其中value和next都用volatile修饰，保证并发的可见性。Java8 ConcurrentHashMap结构基本上和Java8的HashMap一样，不过保证线程安全性。</p>
+<p>其实可以看出JDK1.8版本的ConcurrentHashMap的数据结构已经接近HashMap，相对而言，ConcurrentHashMap只是增加了同步的操作来控制并发，从JDK1.7版本的ReentrantLock+Segment+HashEntry，到JDK1.8版本中synchronized+CAS+HashEntry+红黑树，因而主要有以下不同：</p>
+<ol>
+<li>数据结构：取消了Segment分段锁的数据结构，取而代之的是数组+链表+红黑树的结构。</li>
+<li>保证线程安全机制：JDK1.7采用segment的分段锁机制实现线程安全，其中segment继承自ReentrantLock。JDK1.8采用CAS+Synchronized保证线程安全。</li>
+<li>锁的粒度：原来是对需要进行数据操作的Segment加锁，现调整为对每个数组元素加锁（Node）。</li>
+<li>链表转化为红黑树:定位结点的hash算法简化会带来弊端,Hash冲突加剧,因此在链表节点数量大于8时，会将链表转化为红黑树进行存储。</li>
+<li>查询时间复杂度：从原来的遍历链表O(n)，变成遍历红黑树O(logN)。</li>
+</ol>
+<h4 id="HashMap和HashSet的区别"><a href="#HashMap和HashSet的区别" class="headerlink" title="HashMap和HashSet的区别"></a>HashMap和HashSet的区别</h4><table>
+<thead>
+<tr>
+<th>HashMap</th>
+<th>HashSet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HashMap实现了Map接口</td>
+<td>HashSet实现了Set接口</td>
+</tr>
+<tr>
+<td>HashMap存储的是键值对</td>
+<td>HashSet仅存储对象</td>
+</tr>
+<tr>
+<td>添加元素使用put方法</td>
+<td>添加元素使用add方法</td>
+</tr>
+<tr>
+<td>使用键对象计算哈希值</td>
+<td>使用成员对象计算哈希值</td>
+</tr>
+</tbody>
+</table>
+<h4 id="HashMap与HashTable的区别"><a href="#HashMap与HashTable的区别" class="headerlink" title="HashMap与HashTable的区别"></a>HashMap与HashTable的区别</h4><table>
+<thead>
+<tr>
+<th>HashMap</th>
+<th>HashTable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可接受Null键值和值</td>
+<td>不能接受Null键值和值</td>
+</tr>
+<tr>
+<td>非同步，线程不安全</td>
+<td>同步</td>
+</tr>
+<tr>
+<td>较快</td>
+<td>较慢</td>
+</tr>
+<tr>
+<td>继承自AbstractMap类</td>
+<td>继承自Dictionary类</td>
+</tr>
+</tbody>
+</table>
+<h4 id="HashMap中put方法流程"><a href="#HashMap中put方法流程" class="headerlink" title="HashMap中put方法流程"></a>HashMap中put方法流程</h4><p><img src="https://raw.githubusercontent.com/yuanhc009/yuanhc009.github.io/master/img/HashMap%E4%B8%ADput%E6%96%B9%E6%B3%95%E6%B5%81%E7%A8%8B.png" alt="HashMap中put方法流程"></p>
+<h4 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h4><p>Queue的常用方法如下：  </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>抛出异常</th>
+<th>返回一个特殊值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>插入值</td>
+<td>add(e)</td>
+<td>offer(e)</td>
+</tr>
+<tr>
+<td>移除值</td>
+<td>Remove()</td>
+<td>poll()</td>
+</tr>
+<tr>
+<td>获取值</td>
+<td>elment()</td>
+<td>peek()</td>
+</tr>
+</tbody>
+</table>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ArrayList, LinkedList, Vector</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HashMap, TreeMap, HashSet, TreeSet</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/05/06/java中的容器（二）/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/04/27/java中的容器（一）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java中的容器（一）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -229,8 +474,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
