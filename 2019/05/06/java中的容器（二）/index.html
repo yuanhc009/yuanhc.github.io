@@ -18,7 +18,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://github.com/yuanhc009/yuanhc009.github.io/blob/master/2019/05/06/java中的容器（二）/all.jpg">
 <meta property="og:image" content="https://github.com/yuanhc009/yuanhc009.github.io/blob/master/2019/05/06/java中的容器（二）/HashMap%E4%B8%ADput%E6%96%B9%E6%B3%95%E6%B5%81%E7%A8%8B.png">
-<meta property="og:updated_time" content="2019-05-06T07:21:42.331Z">
+<meta property="og:updated_time" content="2019-05-06T07:49:44.399Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java中的容器（二）">
 <meta name="twitter:description" content="Java中常见的容器有List, Set, Map等，其中，各个容器的抽象接口及实现类的关系如下。本文主要讲Java中的Map和Set的一些内容，主要以问题的形式进行阐述。">
@@ -416,6 +416,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/05/14/java中的类型信息/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          java中的类型信息
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/04/27/java中的容器（一）/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">java中的容器（一）</div>
@@ -437,6 +446,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap是怎么解决哈希冲突的？"><span class="toc-number">1.</span> <span class="toc-text">HashMap是怎么解决哈希冲突的？</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#什么是哈希"><span class="toc-number">1.0.1.</span> <span class="toc-text">什么是哈希</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#什么是哈希冲突呢"><span class="toc-number">1.0.2.</span> <span class="toc-text">什么是哈希冲突呢</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#HashMap的数据结构"><span class="toc-number">1.0.3.</span> <span class="toc-text">HashMap的数据结构</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Hash-函数"><span class="toc-number">1.0.4.</span> <span class="toc-text">Hash()函数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#总结"><span class="toc-number">1.0.5.</span> <span class="toc-text">总结</span></a></li></ol></li></ol><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap为什么不直接使用hashCode-处理后的哈希值直接作为table的下标？"><span class="toc-number">2.</span> <span class="toc-text">HashMap为什么不直接使用hashCode()处理后的哈希值直接作为table的下标？</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#那么怎么解决呢？"><span class="toc-number">2.0.1.</span> <span class="toc-text">那么怎么解决呢？</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#为什么数组长度要保证为2的幂次方呢？"><span class="toc-number">2.0.2.</span> <span class="toc-text">为什么数组长度要保证为2的幂次方呢？</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#那为什么是两次扰动呢？"><span class="toc-number">2.0.3.</span> <span class="toc-text">那为什么是两次扰动呢？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么HashMap中String、Integer这样的包装类适合作为K？"><span class="toc-number">3.</span> <span class="toc-text">为什么HashMap中String、Integer这样的包装类适合作为K？</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#如果我想要让自己的Object作为K应该怎么办呢？"><span class="toc-number">3.0.1.</span> <span class="toc-text">如果我想要让自己的Object作为K应该怎么办呢？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashSet是如何保证数据不可重复的？"><span class="toc-number">4.</span> <span class="toc-text">HashSet是如何保证数据不可重复的？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CurrentHashMap"><span class="toc-number">5.</span> <span class="toc-text">CurrentHashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#JDK1-7版本的CurrentHashMap的实现原理"><span class="toc-number">5.0.1.</span> <span class="toc-text">JDK1.7版本的CurrentHashMap的实现原理</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#JDK1-8版本的CurrentHashMap的实现原理"><span class="toc-number">5.0.2.</span> <span class="toc-text">JDK1.8版本的CurrentHashMap的实现原理</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap和HashSet的区别"><span class="toc-number">6.</span> <span class="toc-text">HashMap和HashSet的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap与HashTable的区别"><span class="toc-number">7.</span> <span class="toc-text">HashMap与HashTable的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap中put方法流程"><span class="toc-number">8.</span> <span class="toc-text">HashMap中put方法流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Queue"><span class="toc-number">9.</span> <span class="toc-text">Queue</span></a></li>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
