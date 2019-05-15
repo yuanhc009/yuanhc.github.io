@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://github.com/yuanhc009/yuanhc009.github.io/blob/master">
-  <title>Archives: 2019 | yuanhc</title>
+  <title>yuanhc</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="生活是具体的">
-<meta property="og:type" content="website">
+  <meta name="description" content="Java中的泛型 泛型是为了创造容器类。泛型实现了参数化类型的概念，使代码可以应用于多种类型。Java泛型的核心概念：告诉编译器想使用什么类型，然后编译器帮你处理一切细节。 泛型的主要目标：  指定容器要持有什么类型的对象，而且由编译器来保证类型的正确性 将对数组的插入类型的检测移入到编译器  内部类可以访问外部类的类型参数。基本类型无法作为类型参数，可以用其相应的包装器类型代替。 泛型类 泛型接">
+<meta property="og:type" content="article">
 <meta property="og:title" content="yuanhc">
-<meta property="og:url" content="https://github.com/yuanhc009/yuanhc009.github.io/blob/master/archives/2019/index.html">
+<meta property="og:url" content="https://github.com/yuanhc009/yuanhc009.github.io/blob/master/posts/uncategorized/2019-05-07-泛型.html">
 <meta property="og:site_name" content="yuanhc">
-<meta property="og:description" content="生活是具体的">
+<meta property="og:description" content="Java中的泛型 泛型是为了创造容器类。泛型实现了参数化类型的概念，使代码可以应用于多种类型。Java泛型的核心概念：告诉编译器想使用什么类型，然后编译器帮你处理一切细节。 泛型的主要目标：  指定容器要持有什么类型的对象，而且由编译器来保证类型的正确性 将对数组的插入类型的检测移入到编译器  内部类可以访问外部类的类型参数。基本类型无法作为类型参数，可以用其相应的包装器类型代替。 泛型类 泛型接">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-10T13:50:07.666Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="yuanhc">
-<meta name="twitter:description" content="生活是具体的">
+<meta name="twitter:description" content="Java中的泛型 泛型是为了创造容器类。泛型实现了参数化类型的概念，使代码可以应用于多种类型。Java泛型的核心概念：告诉编译器想使用什么类型，然后编译器帮你处理一切细节。 泛型的主要目标：  指定容器要持有什么类型的对象，而且由编译器来保证类型的正确性 将对数组的插入类型的检测移入到编译器  内部类可以访问外部类的类型参数。基本类型无法作为类型参数，可以用其相应的包装器类型代替。 泛型类 泛型接">
   
     <link rel="alternative" href="/atom.xml" title="yuanhc" type="application/atom+xml">
   
@@ -153,146 +154,266 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-泛型" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Java中的泛型</p>
+<p>泛型是为了创造容器类。<br>泛型实现了参数化类型的概念，使代码可以应用于多种类型。<br>Java泛型的核心概念：告诉编译器想使用什么类型，然后编译器帮你处理一切细节。</p>
+<p>泛型的主要目标：</p>
+<ol>
+<li>指定容器要持有什么类型的对象，而且由编译器来保证类型的正确性</li>
+<li>将对数组的插入类型的检测移入到编译器</li>
+</ol>
+<p>内部类可以访问外部类的类型参数。<br>基本类型无法作为类型参数，可以用其相应的包装器类型代替。</p>
+<p>泛型类</p>
+<p>泛型接口</p>
+<p>泛型方法</p>
+<p>是否拥有泛型方法，与其所在的类是否是泛型没有关系<br>如果使用泛型方法可以取代将整个类泛型化，那么就应该只使用泛型方法，因为它可以使事情更清楚明白。</p>
+<p>为何static变量和static方法无法访问泛型类的类型参数？<br>静态部分是JVM加载class时初始化的，而这时非静态部分是没有初始化的，对象在实例化时才知道泛型的具体类型，所以JVM不知道你的泛型是什么鬼东西，因而不能访问泛型类的类型参数。  </p>
+<p>当使用泛型类时，必须在创建对象的时候指定类型参数的值，而使用泛型方法时，通常不必指明参数类型，因为编译器会为我们找到具体的类型。这就是类型参数推断。</p>
+<blockquote>
+<p>public <t> void f(T x){<br>&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(x.getClass().getName());<br>}<br>f(“ “);<br>f(2);<br>f(‘c’);  </t></p>
+</blockquote>
+<p>类型推断只对赋值操作有效，其他的时候并不起作用。如果将一个泛型方法调用的结果作为参数，传递给另一个方法，这时编译器并不会执行类型推断。解决的方法有2种：</p>
+<ul>
+<li>先将泛型方法调用的结果赋值给一个变量，然后将此变量作为参数传递给另一个方法</li>
+<li>显式的指明类型。在点操作符与方法名之间插入尖括号，然后把类型置于尖括号内。</li>
+</ul>
+<p>泛型方法与可变参数列表能够很好的共存。</p>
+<p>泛型还可以用于内部类和匿名内部类。</p>
+<h4 id="擦除"><a href="#擦除" class="headerlink" title="擦除"></a>擦除</h4><p>在泛型代码内部，无法获得任何有关泛型参数类型的信息。Java泛型是通过使用擦除来实现的，这意味着当你使用泛型时，任何具体的类型信息都被擦除了，你唯一知道的就是你在使用一个对象。<br>ArrayList<string>与ArrayList<integer>的类型是相同的。<br>即 new ArrayList<string>().getClass() = new ArrayList<integer>().getClass()<br>原因：鉴于Java中的泛型这一概念提出的目的（由编译器保证类型的正确性），导致其只作用于代码编译阶段，在编译过程中，对于正确检验泛型结果后，会将泛型的相关信息擦除，也就是说，成功编译后的class文件中不包含任何泛型信息，泛型信息不会进入到运行时阶段。<br>泛型类型只有在<strong>静态类型检查期间</strong>才出现，在此之后，程序中的所有泛型类型都将被擦除，替换为它们的非泛型上界。</integer></string></integer></string></p>
+<p>当你希望代码能够跨多个类工作时，使用泛型才有所帮助。</p>
+<p>擦除的核心动机是它使得泛化的客户端可以用非泛化的类库来使用，反之亦然，这经常被称为“迁移兼容性”。</p>
+<p>擦除的正当理由是<strong>从非泛化代码到泛化代码的转变过程，以及在不破坏现有类库的情况下，将泛型融入Java语言*</strong>。<br>擦除的代价：泛型不能用于显式的引用运行时类型的操作之中，例如转型、instanceof操作和new表达式。因为所有关于参数的类型信息都丢失了，只是看起来好像拥有有关参数的类型信息而已。  </p>
+<p>对于在泛型中创建数组，使用Array.newInstance()是推荐的方式。  </p>
+<p>即使擦除在方法或类内部移除了有关实际类型的信息，编译器仍旧可以确保在方法或类中使用的类型的内部一致性。</p>
+<p>擦除的补偿：</p>
+<ul>
+<li>引入类型标签，例如Building.class。从而可以使用isInstance(),并且可以识别继承关系。</li>
+<li>传递一个工厂对象，使用它来创建新的实例。最便利的工厂对象就是Class对象，因此如果使用类型标签，那么就可以使用newInstance()来创建这个类型的新对象。值得注意的是，最好使用显式的工厂，并将限制其类型，使得只能接受实现了这个工厂的类，从而避免因某个类无默认构造器，而在编译器检查不到。</li>
+</ul>
+<p>创建类型实例需要具备两个条件：</p>
+<ol>
+<li>拥有T的类型标签</li>
+<li>T具有默认（无参）构造器</li>
+</ol>
+<p><strong><em>边界</em></strong>：边界就是发生动作的地方。对传递进来的值进行额外的编译期检查，并插入对传递出去的值的转型。</p>
+<h4 id="泛型数组"><a href="#泛型数组" class="headerlink" title="泛型数组"></a>泛型数组</h4><p>不能创建泛型数组。<br>一般的解决方案是在任何想要创建泛型数组的地方都使用ArrayList,从而获得数组的行为，以及由泛型提供的编译期的类型安全。</p>
+<p>创建泛型数组的唯一方式是创建一个被擦除类型的新数组，然后对其转型。<br>这里所说的创建一个被擦除类型的新数组是指new一个Object数组，然后对其转型，但是由于擦除，数组的运行时类型就只能是Object[]，所以如果在创建时立即将其转型为T[]，那么在编译期该数组的实际类型就将丢失，而编译器可能会错过某些潜在的错误检查。所以，最好是在集合内部使用Object[]，然后当你使用数组元素时，添加一个对T的转型，但是仍旧不能将整个数组转型成T[]。<br>切记：没有任何方式可以推翻底层的数组类型，它只能是Object[]</p>
+<p>T[] array = (T[])Array.newInstance(type, sz)<br>其中，type是类型标签，sz是数组的大小。这时，数组的运行时类型就是确切类型T[]了。</p>
+<h4 id="边界"><a href="#边界" class="headerlink" title="边界"></a>边界</h4><p>边界可在用于泛型的参数类型上设置限制条件，从而强制规定泛型可以应用的类型，更重要的是，可以按照边界类型来调用方法。<br>一般形式是：<t extends dimension & hascolor><br>当有类和接口同时存在时，类必须在前面，接口在后面</t></p>
+<h4 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h4><p>数组的一种特殊行为：可以向导出类型的数组赋予基类型的数组引用。</p>
+<blockquote>
+<p>class Fruit{}<br>class Apple extends Fruit{}<br>class Jonathan extends Apple{}<br>class Orange extends Fruit{}<br>&nbsp;<br>Fruit[] fruit = new Apple[10];<br>Fruit[0] = new Apple();  &nbsp; &nbsp;//OK<br>Fruit[1] = new Jonathan();   &nbsp; &nbsp;//OK<br>Fruit[0] = new Fruit();   &nbsp; &nbsp;//ERROR<br>Fruit[0] = new Orange();   &nbsp; &nbsp;//ERROR</p>
+</blockquote>
+<p>为何后两个出错呢？因为运行时的数组机制知道它处理的是Apple[]，因此会在向数组中放置异构类型时抛出异常。但是编译都是通过的。</p>
+<p>若我们希望将这种错误移入到编译期，也就是说，在编译期就能发现这种错误，那么我们可以使用泛型容器来代替数组。<br>List<fruit> flist = new ArrayList<apple>();<br>编译出错。因为泛型没有内建的协变类型。也就是说，List<fruit>和List<apple>是没有关系的。但是Fruit和Apple的继承关系依然成立，其对象依然是可以转型的。如下：</apple></fruit></apple></fruit></p>
+<blockquote>
+<p>ArrayList<fruit> flist = new ArrayList<fruit>();<br>Apple apple = new Apple();<br>flist.add(apple);</fruit></fruit></p>
+</blockquote>
+<p>解决方法就是使用通配符，此时，flist是<strong>具有任何从Fruit继承的类型的列表</strong><br>List&lt;？ extends Fruit&gt; flist = new ArrayList<apple>();  </apple></p>
+<p>但是但是，add()函数并不能起作用。这是因为当你指定一个ArrayList&lt;? extends Fruit&gt;时，add()的参数就变成了”? extends Fruit”,而编译器并不能了解这里需要Fruit的哪个具体子类型，因此它不会接受任何类型的Fruit  </p>
+<p><strong>编译器将直接拒绝对参数列表中涉及通配符的方法的调用</strong>，其他的不涉及任何通配符的方法，则可以正常使用。</p>
+<p>解决的方法是使用<strong>超类型通配符</strong>，&lt;? super T&gt;</p>
+<blockquote>
+<p>List<fruit> fruit = new ArrayList<fruit>();<br>void f1(List&lt;? super T&gt; list, item){<br>list.add(item);<br>}<br>&nbsp;<br>f1(fruit, new Apple());</fruit></fruit></p>
+</blockquote>
+<p>在f1()中，其参数是List&lt;? super T&gt;,因此这个List将持有从T导出的某种具体类型，这样就可以安全地将一个T类型的对象或者从T导出的任何对象作为参数传递给List的方法。</p>
+<h4 id="通配符-1"><a href="#通配符-1" class="headerlink" title="通配符"></a>通配符</h4><p>Java有三种通配符限定：子类型限定通配符、超类型限定通配符、无类型通配符。</p>
+<h6 id="子类型限定通配符"><a href="#子类型限定通配符" class="headerlink" title="子类型限定通配符"></a>子类型限定通配符</h6><p>&lt;? extends T&gt;限定参数类型的上界：参数类型必须是T或T的子类型<br>子类型限定通配符可以从泛型类读取，但不能向泛型类写入。也就是说，<strong>编译器将直接拒绝对参数列表中涉及通配符的方法的调用</strong>，其他的不涉及任何通配符的方法，则可以正常使用。</p>
+<h6 id="超类型限定通配符"><a href="#超类型限定通配符" class="headerlink" title="超类型限定通配符"></a>超类型限定通配符</h6><p>&lt;? super T&gt; 限定参数类型的下界：参数类型必须是T或T的超类型<br>表示参数是Apple的父类。带有超类型的通配符可以向泛型对象写入，但不能从泛型对象读取。</p>
+<p> ArrayList&lt;? super Fruit&gt; fruits=new ArrayList&lt;&gt;();<br> 列表可以添加Fruit或者Fruit的子类，但不可以添加Fruit的父类，这里也许会觉得奇怪，? super Fruit不就是代表Fruit的父类吗，为什么不能添加呢，其实仔细考虑一下，在存入Fruit子类的时候，实际上是进行了隐性的类型转换——子类转父类，即<br>fruits.add(new Apple());<br>实际上是<br>fruits.add((Fruit)new Apple());</p>
+<ol>
+<li>&lt;? extends T&gt; 只能用于方法返回，告诉编译器此返参的类型的最小继承边界为T，T和T的父类都能接收，但是入参类型无法确定，只能接受null的传入</li>
+<li>&lt;? super T&gt;只能用于限定方法入参，告诉编译器入参只能是T或其子类型，而返参只能用Object类接收</li>
+<li>? 既不能用于入参也不能用于返参</li>
+</ol>
+<blockquote>
+<pre><code>class Super{
+}
+class Self extends Super{
+}
+class Son extends Self{
+}
+public static void main(String[] args) {
+    List&lt;? extends Self&gt; a = new ArrayList&lt;&gt;();//参数类型上界是Self
+    a.add(new Son());//error 不能放入任何类型，因为编译器只知道a中应该放入Self的某个子类，但具体放哪种子类它并不知道，因此，除了null以外，不能放入任何类型
+    a.add(new Self());//error
+    a.add(new Super());//error
+    a.add(null);//ok
+    Self s1 = a.get(0); //返回类型是确定的Self类，因为&lt;? extends T&gt; 只能用于方法返回，告诉编译器此返参的类型的最小继承边界为T，T和T的父类都能接收，但是入参类型无法确定，只能接受null的传入
+    Super s2 = a.get(0); //Self类型可以用Super接收
+    Son s3 = a.get(0); //error:子类不能接收父类型参数
+    //--------------------------------------
+    List&lt;? super Self&gt; b = new ArrayList&lt;&gt;();//参数类型下界是Self
+    b.add(new Son());//ok 只能放入T类型，且满足T类型的超类至少是Self，换句话说，就是只能放入Self的子类型
+    b.add(new Self());//ok 本身类型也可以
+    b.add(new Super());//error 超类不可以
+    b.add(null);//ok
+    Object o1 = b.get(0);//ok,返回类型是未知的， 因为&lt;? super T&gt;只能用于限定方法入参，告诉编译器入参只能是T或其子类型，而返参只能用Object类接收
+    Son o2 = b.get(0);//error
+    Self o3 = b.get(0);//error
+    Super o4 = b.get(0);//error
+    //--------------------------------------
+    List&lt;?&gt; c = new ArrayList&lt;&gt;();
+    c.add(new Son()); //error
+    c.add(new Self()); //error
+    c.add(new Super()); //error
+    c.add(null);  //ok
+    Super r1 = c.get(0); //error
+    Self r2 = c.get(0);  //error
+    Son r3 = c.get(0); //error
+}
+</code></pre></blockquote>
+<h4 id="List-与-List-之间为什么是非继承关系。"><a href="#List-与-List-之间为什么是非继承关系。" class="headerlink" title="List 与 List 之间为什么是非继承关系。"></a>List<fruit> 与 List<apple> 之间为什么是非继承关系。</apple></fruit></h4><p>  　　　　1、Java中泛型是后来引入的特性，为了兼容之前的代码，泛型是存在擦除机制的，List<fruit> 与 List<apple> 在擦除后的class中均为List，并不存在继承关系。</apple></fruit></p>
+<p>  　　　　2、从逻辑上解释不能有继承关系的原因：</p>
+<blockquote>
+<p>public void test(List<fruit> list) {<br>      　　  list.add(new Orange());<br>}  </fruit></p>
+</blockquote>
+<p>在上面的代码中，test方法接收一个List<fruit> 类型的list，并在此list 中插入了一个Orange对象，这个方法是没有任何问题的。现在假设List<fruit> 与 List<apple> 间存在继承关系，那么此方法可以接收一个List<apple> 类型的list 参数作为方法的参数，然而之后在方法中就会在一个声明是List<apple> 的list 中插入一个 Orange 对象，这显然是不符合逻辑的。所以 List<fruit> 与 List<apple> 之间应该是非继承关系。<br>h</apple></fruit></apple></apple></apple></fruit></fruit></p>
+<p>原生List 与 List&lt;?&gt; 区别。</p>
+<p>　　　　无界通配符 ？ 与 原生类型看似好像是等价的，但无界通配符可以有以下含义：“我是想用Java的泛型来编写这段代码，我在这里并不是要用原生类型，但是在当前这种情况下，泛型参数可以持有任何类型”。</p>
+<p>　　　　使用无界通配符的  List&lt;?&gt; 要比 原生 List 要安全些。 在原生 list 中，我们可以随意进行插入操作，可以向同一个 list 中既插入 object 对象，又插入 Fruit，Apple 对象，而 List&lt;?&gt; 是不允许进行 add 操作的。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/posts/uncategorized/2019-05-14-java中的类型信息.html" class="archive-article-date">
-  	<time datetime="2019-05-14T01:41:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/posts/uncategorized/2019-05-14-java中的类型信息.html">java中的类型信息</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://github.com/yuanhc009/yuanhc009.github.io/blob/master/posts/uncategorized/2019-05-07-泛型.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/posts/uncategorized/2019-05-07-泛型.html" class="archive-article-date">
-  	<time datetime="2019-05-07T01:05:31.016Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-07</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/posts/uncategorized/2019-05-14-java中的类型信息.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          java中的类型信息
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/uncategorized/2019-05-06-java中的容器（二）.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java中的容器（二）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+        
+        
+    </div>
+</aside>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/posts/uncategorized/2019-05-06-java中的容器（二）.html" class="archive-article-date">
-  	<time datetime="2019-05-06T01:36:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-06</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/posts/uncategorized/2019-05-06-java中的容器（二）.html">java中的容器（二）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HashMap, TreeMap, HashSet, TreeSet</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/posts/uncategorized/2019-04-27-java中的容器（一）.html" class="archive-article-date">
-  	<time datetime="2019-04-27T03:11:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/posts/uncategorized/2019-04-27-java中的容器（一）.html">java中的容器（一）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ArrayList, LinkedList, Vector</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -315,8 +436,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://github.com/yuanhc009/yuanhc009.github.io/blob/master">
-  <title>Archives: 2019 | yuanhc</title>
+  <title>java中的类型信息 | yuanhc</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="生活是具体的">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yuanhc">
-<meta property="og:url" content="https://github.com/yuanhc009/yuanhc009.github.io/blob/master/archives/2019/index.html">
+  <meta name="description" content="Java中运行时识别对象和类的信息的方式有2种：    “传统”的RTTI，它假定我们在编译时已经知道了所有的类型 反射机制，它允许我们在运行时发现和使用类的信息  本文将主要介绍java中的RTTI和Class引用的相关内容。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java中的类型信息">
+<meta property="og:url" content="https://github.com/yuanhc009/yuanhc009.github.io/blob/master/posts/uncategorized/2019-05-14-java中的类型信息.html">
 <meta property="og:site_name" content="yuanhc">
-<meta property="og:description" content="生活是具体的">
+<meta property="og:description" content="Java中运行时识别对象和类的信息的方式有2种：    “传统”的RTTI，它假定我们在编译时已经知道了所有的类型 反射机制，它允许我们在运行时发现和使用类的信息  本文将主要介绍java中的RTTI和Class引用的相关内容。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-15T02:02:36.404Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yuanhc">
-<meta name="twitter:description" content="生活是具体的">
+<meta name="twitter:title" content="java中的类型信息">
+<meta name="twitter:description" content="Java中运行时识别对象和类的信息的方式有2种：    “传统”的RTTI，它假定我们在编译时已经知道了所有的类型 反射机制，它允许我们在运行时发现和使用类的信息  本文将主要介绍java中的RTTI和Class引用的相关内容。">
   
     <link rel="alternative" href="/atom.xml" title="yuanhc" type="application/atom+xml">
   
@@ -153,146 +154,249 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="w-java中的类型信息" class="article article-type-w " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      java中的类型信息
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-w">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/posts/uncategorized/2019-05-14-java中的类型信息.html" class="archive-article-date">
+
+        
+        <a href="/posts/uncategorized/2019-05-14-java中的类型信息.html" class="archive-article-date">
   	<time datetime="2019-05-14T01:41:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-14</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/posts/uncategorized/2019-05-14-java中的类型信息.html">java中的类型信息</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Java中运行时识别对象和类的信息的方式有2种：  </p>
+<ol>
+<li>“传统”的RTTI，它假定我们在编译时已经知道了所有的类型</li>
+<li>反射机制，它允许我们在运行时发现和使用类的信息</li>
+</ol>
+<p>本文将主要介绍java中的RTTI和Class引用的相关内容。</p>
+<a id="more"></a>
+<h4 id="RTTI"><a href="#RTTI" class="headerlink" title="RTTI"></a>RTTI</h4><p>并不是所有的Class都能在编译时明确，因此在某些情况下需要在运行时再发现和确定类型信息,这就要用到运行时类型识别。<br>运行时类型识别(RTTI, Run-Time Type Identification)是Java中非常有用的机制，在Java运行时，RTTI维护类的相关信息。<br>RTTI的功能主要是由Class类来实现的，而多态是基于RTTI实现的。</p>
+<h6 id="RTTI的主要形式"><a href="#RTTI的主要形式" class="headerlink" title="RTTI的主要形式"></a>RTTI的主要形式</h6><ul>
+<li>传统的类型转换，由RTTI保证类型转换的正确性。  </li>
+<li>代表对象的类型的Class对象，通过查询Class对象可以获取运行时所需的信息  </li>
+<li>关键字instanceof, 它返回一个布尔值，告诉我们对象是不是某个特定类型的实例</li>
+</ul>
+<h4 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h4><h6 id="获取Class类对象的方法"><a href="#获取Class类对象的方法" class="headerlink" title="获取Class类对象的方法"></a>获取Class类对象的方法</h6><ul>
+<li>Class.forName(str)，其中str是想要获取的类的名字  注意必须使用类的全限定名  </li>
+<li>类名.class，直接调用类的class成员  </li>
+<li>obj.getClass(), 通过类的实例获取该类的类对象</li>
+</ul>
+<h6 id="Class类的常用方法"><a href="#Class类的常用方法" class="headerlink" title="Class类的常用方法"></a>Class类的常用方法</h6><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AppleClass.newInstance()</td>
+<td>生成Apple的实例（Apple必须有默认构造器）</td>
+</tr>
+<tr>
+<td>AppleClass.isInstance(obj)</td>
+<td>判断obj是不是Apple的一个实例</td>
+</tr>
+<tr>
+<td>AppleClass.isInterface()</td>
+<td>判断Apple是否是一个接口</td>
+</tr>
+<tr>
+<td>AppleClass.getName()</td>
+<td>获取Apple的全限定的类名</td>
+</tr>
+<tr>
+<td>AppleClass.getSimpleName()</td>
+<td>获取不含包名的类名</td>
+</tr>
+<tr>
+<td>AppleClass.getCanonicalName()</td>
+<td>获取Apple全限定的类名</td>
+</tr>
+<tr>
+<td>AppleClass.getInterfaces()</td>
+<td>获取Apple的所有接口</td>
+</tr>
+<tr>
+<td>AppleClass.getSuperClass()</td>
+<td>获取Apple的父类</td>
+</tr>
+<tr>
+<td>AppleClass.getFields()</td>
+<td>获取Apple中的所有public数据成员</td>
+</tr>
+<tr>
+<td>AppleClass.getMethods()</td>
+<td>获取Apple中所有public成员方法，包括其超类和超接口中的</td>
+</tr>
+</tbody>
+</table>
+<h6 id="Class对象"><a href="#Class对象" class="headerlink" title="Class对象"></a>Class对象</h6><p>为了使用类而做的准备工作实际上包含三个步骤：</p>
+<ol>
+<li><strong>加载</strong>。由加载器执行，将查找字节码（通常在classpath所指定的路径中查找，但是这并非是必要的），并从这些字节码中创建一个Class对象</li>
+<li><strong>链接</strong>。将验证类中国的字节码，为静态域分配存储空间，并且如果必需的话，将解析这个类创建的对其他类的所有引用。</li>
+<li><strong>初始化</strong>。如果该类具有超类，则对其初始化，执行静态初始化器和静态初始化块。初始化被延迟到了对静态方法（构造器隐式地是静态的）或者非常数静态域进行首次引用时才执行。</li>
+</ol>
+<p>也就是说，</p>
+<ul>
+<li>Apple.class 不触发初始化；Class.forName(“Apple”) 触发初始化</li>
+<li>static但不是final的数据成员，首次引用时触发初始化</li>
+<li>编译期常量（static final int a=47）首次引用时不触发初始化；非编译期常量（static final int b=ClassInitialization.rand.nextInt(1000)）首次引用时触发初始化</li>
+</ul>
+<p>注意：当使用”.class”来创建对Class对象的引用时，不会自动地初始化该Class对象。</p>
+<h6 id="泛化的Class引用"><a href="#泛化的Class引用" class="headerlink" title="泛化的Class引用"></a>泛化的Class引用</h6><p>向Class引用添加泛型语法可以为其提供编译期类型检查。</p>
+<blockquote>
+<p>Class<apple> appleClass = Apple.class;<br>Class&lt;? super Apple&gt; up = appleClass.getSuperClass();<br>// Class<fruit> up2 = appleClass.getSuperClass();  //ERROR<br>Object obj = up.newInstance();</fruit></apple></p>
+</blockquote>
+<p>虽然getSuperClass()方法返回的是基类，并且编译器在编译期就知道它是什么类型，但是这里仍然不能接受Class<fruit>，而且up的实例的返回值也不是精确类型，而只是Object。所以此时可能还是泛型的性质在起作用。</fruit></p>
+<h6 id="新的转型cast"><a href="#新的转型cast" class="headerlink" title="新的转型cast"></a>新的转型cast</h6><blockquote>
+<p>Fruit f = new Apple();<br>Class<apple> appleType = Apple.class;<br>Apple a = appleType.cast(f)  //等价于 a = (Apple) f  </apple></p>
+</blockquote>
+<h6 id="instanceof-与-isInstance"><a href="#instanceof-与-isInstance" class="headerlink" title="instanceof 与 isInstance"></a>instanceof 与 isInstance</h6><p>obj instanceof type<br>instanceof只可将其与<strong>命名类型</strong>进行比较，而不能与Class对象作比较。例如：appleobj instanceof Apple  </p>
+<p>ClassType.isInstance(obj)<br>isInstance是将实例与Class对象进行比较。例如：appleClass.isInstance(appleobj)</p>
+<p>注意：在进行instanceof和isInstance判断时，子类的实例也被看作是父类的一个实例，都返回true</p>
+<p>instanceOf 与 Class的等价性：获取Class引用，并用 == 和 equals()来检查Class对象是否相等。例如：a.getClass() == Apple.class<br>结论：instanceof和isInstance生成的结果完全一样，equals()和==也一样。但是这两组测试得出的结论却不相同。instanceof保持了类型的概念，它指的是”你是这个类吗，或者你是这个类的派生类吗”，而如果用==比较实际的Class对象，就没有考虑继承————它或者是这个确切的类型，或者不是。</p>
+<h4 id="RTTI和反射的区别"><a href="#RTTI和反射的区别" class="headerlink" title="RTTI和反射的区别"></a>RTTI和反射的区别</h4><p>对RTTI来说，编译器在<strong>编译时</strong>打开和检查.class文件<br>而对于反射机制来说，.class文件在编译时是不可获取的，所以是在<strong>运行时</strong>打开和检查.class文件。</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://github.com/yuanhc009/yuanhc009.github.io/blob/master/posts/uncategorized/2019-05-14-java中的类型信息.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/posts/uncategorized/2019-05-07-泛型.html" class="archive-article-date">
-  	<time datetime="2019-05-07T01:05:31.016Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-07</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/posts/uncategorized/2019-05-07-泛型.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+        
+        
+    </div>
+</aside>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/posts/uncategorized/2019-05-06-java中的容器（二）.html" class="archive-article-date">
-  	<time datetime="2019-05-06T01:36:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-06</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/posts/uncategorized/2019-05-06-java中的容器（二）.html">java中的容器（二）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HashMap, TreeMap, HashSet, TreeSet</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/posts/uncategorized/2019-04-27-java中的容器（一）.html" class="archive-article-date">
-  	<time datetime="2019-04-27T03:11:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/posts/uncategorized/2019-04-27-java中的容器（一）.html">java中的容器（一）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ArrayList, LinkedList, Vector</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -315,8 +419,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
